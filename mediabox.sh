@@ -33,8 +33,8 @@ if [ -e 1.env ]; then
 # Grab the CouchPotato, NBZGet, & PIA usernames & passwords to reuse
 daemonun=$(grep CPDAEMONUN 1.env | cut -d = -f2)
 daemonpass=$(grep CPDAEMONPASS 1.env | cut -d = -f2)
-piauname=$(grep PIAUNAME 1.env | cut -d = -f2)
-piapass=$(grep PIAPASS 1.env | cut -d = -f2)
+# piauname=$(grep PIAUNAME 1.env | cut -d = -f2)
+# piapass=$(grep PIAPASS 1.env | cut -d = -f2)
 tvdirectory=$(grep TVDIR 1.env | cut -d = -f2)
 moviedirectory=$(grep MOVIEDIR 1.env | cut -d = -f2)
 musicdirectory=$(grep MUSICDIR 1.env | cut -d = -f2)
@@ -91,12 +91,12 @@ function mask2cdr()
 mask2cdr $subnet_mask # Call the function to convert to CIDR
 lannet=$(echo "$lannet/$cidr_bits") # Combine lannet and cidr
 
-if [ -z "$piauname" ]; then
-# Get Private Internet Access Info
-read -r -p "What is your PIA Username?: " piauname
-read -r -s -p "What is your PIA Password? (Will not be echoed): " piapass
-printf "\\n\\n"
-fi
+# if [ -z "$piauname" ]; then
+# # Get Private Internet Access Info
+# read -r -p "What is your PIA Username?: " piauname
+# read -r -s -p "What is your PIA Password? (Will not be echoed): " piapass
+# printf "\\n\\n"
+# fi
 # Get info needed for PLEX Official image
 read -r -p "Which PLEX release do you want to run? By default 'public' will be used. (latest, public, plexpass): " pmstag
 read -r -p "If you have PLEXPASS what is your Claim Token from https://www.plex.tv/claim/ (Optional): " pmstoken
@@ -142,48 +142,48 @@ if [ -z "$musicdirectory" ]; then
 fi
 mkdir -p content/completed
 mkdir -p content/incomplete
-mkdir -p couchpotato
+# mkdir -p couchpotato
 mkdir -p delugevpn
 mkdir -p delugevpn/config/openvpn
-mkdir -p duplicati
-mkdir -p duplicati/backups
+# mkdir -p duplicati
+# mkdir -p duplicati/backups
 mkdir -p jackett
-mkdir -p minio
+# mkdir -p minio
 mkdir -p muximux
-mkdir -p nzbget
+# mkdir -p nzbget
 mkdir -p ombi
 mkdir -p "plex/Library/Application Support/Plex Media Server/Logs"
 mkdir -p portainer
 mkdir -p radarr
-mkdir -p sickrage
+# mkdir -p sickrage
 mkdir -p sonarr
 mkdir -p tautulli
 
-# Select and Move the PIA VPN files
-# Create a menu selection
-echo "The following PIA Servers are avialable that support port-forwarding (for DelugeVPN); Please select one:"
-PS3="Use a number to select a Server File or 'c' to cancel: "
-# List the ovpn files
-select filename in ovpn/*.ovpn
-do
-    # leave the loop if the user says 'c'
-    if [[ "$REPLY" == c ]]; then break; fi
-    # complain if no file was selected, and loop to ask again
-    if [[ "$filename" == "" ]]
-    then
-        echo "'$REPLY' is not a valid number"
-        continue
-    fi
-    # now we can use the selected file
-    echo "$filename selected"
-    cp "$filename" delugevpn/config/openvpn/ > /dev/null 2>&1
-    vpnremote=$(grep "remote" "$filename" | cut -d ' ' -f2  | head -1)
-    # it'll ask for another unless we leave the loop
-    break
-done
-# TODO - Add a default server selection if none selected .. 
-cp ovpn/*.crt delugevpn/config/openvpn/ > /dev/null 2>&1
-cp ovpn/*.pem delugevpn/config/openvpn/ > /dev/null 2>&1
+# # Select and Move the PIA VPN files
+# # Create a menu selection
+# echo "The following PIA Servers are avialable that support port-forwarding (for DelugeVPN); Please select one:"
+# PS3="Use a number to select a Server File or 'c' to cancel: "
+# # List the ovpn files
+# select filename in ovpn/*.ovpn
+# do
+    # # leave the loop if the user says 'c'
+    # if [[ "$REPLY" == c ]]; then break; fi
+    # # complain if no file was selected, and loop to ask again
+    # if [[ "$filename" == "" ]]
+    # then
+        # echo "'$REPLY' is not a valid number"
+        # continue
+    # fi
+    # # now we can use the selected file
+    # echo "$filename selected"
+    # cp "$filename" delugevpn/config/openvpn/ > /dev/null 2>&1
+    # vpnremote=$(grep "remote" "$filename" | cut -d ' ' -f2  | head -1)
+    # # it'll ask for another unless we leave the loop
+    # break
+# done
+# # TODO - Add a default server selection if none selected .. 
+# cp ovpn/*.crt delugevpn/config/openvpn/ > /dev/null 2>&1
+# cp ovpn/*.pem delugevpn/config/openvpn/ > /dev/null 2>&1
 
 # Create the .env file
 echo "Creating the .env file with the values we have gathered"
@@ -208,8 +208,8 @@ echo "PWD=$PWD" >> .env
 echo "TVDIR=$tvdirectory" >> .env
 echo "MOVIEDIR=$moviedirectory" >> .env
 echo "MUSICDIR=$musicdirectory" >> .env
-echo "PIAUNAME=$piauname" >> .env
-echo "PIAPASS=$piapass" >> .env
+# echo "PIAUNAME=$piauname" >> .env
+# echo "PIAPASS=$piapass" >> .env
 echo "CIDR_ADDRESS=$lannet" >> .env
 echo "TZ=$time_zone" >> .env
 echo "PMSTAG=$pmstag" >> .env
@@ -257,19 +257,19 @@ perl -i -pe 's/"allow_remote": false,/"allow_remote": true,/g'  delugevpn/config
 perl -i -pe 's/"move_completed": false,/"move_completed": true,/g'  delugevpn/config/core.conf
 docker start delugevpn > /dev/null 2>&1
 
-# Configure NZBGet
-while [ ! -f nzbget/nzbget.conf ]; do sleep 1; done
-docker stop nzbget > /dev/null 2>&1
-perl -i -pe "s/ControlUsername=nzbget/ControlUsername=$daemonun/g"  nzbget/nzbget.conf
-perl -i -pe "s/ControlPassword=tegbzn6789/ControlPassword=$daemonpass/g"  nzbget/nzbget.conf
-docker start nzbget > /dev/null 2>&1
+# # Configure NZBGet
+# while [ ! -f nzbget/nzbget.conf ]; do sleep 1; done
+# docker stop nzbget > /dev/null 2>&1
+# perl -i -pe "s/ControlUsername=nzbget/ControlUsername=$daemonun/g"  nzbget/nzbget.conf
+# perl -i -pe "s/ControlPassword=tegbzn6789/ControlPassword=$daemonpass/g"  nzbget/nzbget.conf
+# docker start nzbget > /dev/null 2>&1
 
 # Push the Deluge Daemon and NZBGet Access info the to Auth file - and to the .env file
 echo "$daemonun":"$daemonpass":10 >> ./delugevpn/config/auth
 echo "CPDAEMONUN=$daemonun" >> .env
 echo "CPDAEMONPASS=$daemonpass" >> .env
-echo "NZBGETUN=$daemonun" >> .env
-echo "NZBGETPASS=$daemonpass" >> .env
+# echo "NZBGETUN=$daemonun" >> .env
+# echo "NZBGETPASS=$daemonpass" >> .env
 
 # Configure Muximux settings and files
 while [ ! -f muximux/www/muximux/settings.ini.php-example ]; do sleep 1; done
@@ -292,8 +292,8 @@ if [ -e plexpy/plexpy.db ]; then
     docker start tautulli > /dev/null 2>&1
 fi
 
-# Fix the Healthcheck in Minio
-docker exec minio sed -i "s/404/403/g" /usr/bin/healthcheck.sh
+# # Fix the Healthcheck in Minio
+# docker exec minio sed -i "s/404/403/g" /usr/bin/healthcheck.sh
 
 # Adjust the permissions on the content folder
 chmod -R 0777 content/

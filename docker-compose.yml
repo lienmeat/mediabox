@@ -11,7 +11,7 @@
 ##
 ## Have docker-compose.yml and .env in the same directory to launch the stack
 
-version: '3.5'
+version: '3.5.1'
 
 ######################
 # SERVICES TO LAUNCH #
@@ -19,24 +19,24 @@ version: '3.5'
 
 services:
 
-    # ----------------------------------------
-    # COUCHPOTATO
-    # ----------------------------------------
-    couchpotato:
-        image: linuxserver/couchpotato
-        container_name: couchpotato
-        restart: unless-stopped
-        network_mode: "bridge"
-        ports:
-            - '${IP_ADDRESS}:5050:5050'
-        environment:
-            - PUID=${PUID}
-            - PGID=${PGID}
-        volumes:
-            - './couchpotato:/config'
-            - './content/completed:/downloads'
-            - '${MOVIEDIR}:/movies'
-            - '/etc/localtime:/etc/localtime:ro'
+    # # ----------------------------------------
+    # # COUCHPOTATO
+    # # ----------------------------------------
+    # couchpotato:
+        # image: linuxserver/couchpotato
+        # container_name: couchpotato
+        # restart: unless-stopped
+        # network_mode: "bridge"
+        # ports:
+            # - '${IP_ADDRESS}:5050:5050'
+        # environment:
+            # - PUID=${PUID}
+            # - PGID=${PGID}
+        # volumes:
+            # - './couchpotato:/config'
+            # - './content/completed:/downloads'
+            # - '${MOVIEDIR}:/movies'
+            # - '/etc/localtime:/etc/localtime:ro'
 
     # ----------------------------------------
     # DELUGEVPN
@@ -75,24 +75,24 @@ services:
             - './delugevpn/config:/config'
             - '/etc/localtime:/etc/localtime:ro'
 
-    # ----------------------------------------
-    # DUPLICATI
-    # ----------------------------------------
-    duplicati:
-        image: linuxserver/duplicati
-        container_name: duplicati
-        restart: unless-stopped
-        network_mode: "bridge"
-        ports:
-            - '${IP_ADDRESS}:8200:8200'
-        environment:
-            - PUID=${PUID}
-            - PGID=${PGID}
-        volumes:
-            - './duplicati:/config'
-            - './duplicati/backups:/backups'
-            - '${PWD}:/source'
-            - '/etc/localtime:/etc/localtime:ro'
+    # # ----------------------------------------
+    # # DUPLICATI
+    # # ----------------------------------------
+    # duplicati:
+        # image: linuxserver/duplicati
+        # container_name: duplicati
+        # restart: unless-stopped
+        # network_mode: "bridge"
+        # ports:
+            # - '${IP_ADDRESS}:8200:8200'
+        # environment:
+            # - PUID=${PUID}
+            # - PGID=${PGID}
+        # volumes:
+            # - './duplicati:/config'
+            # - './duplicati/backups:/backups'
+            # - '${PWD}:/source'
+            # - '/etc/localtime:/etc/localtime:ro'
 
     # ----------------------------------------
     # JACKETT
@@ -112,23 +112,23 @@ services:
             - './content/completed:/downloads'
             - '/etc/localtime:/etc/localtime:ro'
 
-    # ----------------------------------------
-    # MINIO
-    # ----------------------------------------
-    minio:
-        image: minio/minio
-        container_name: minio
-        restart: unless-stopped
-        network_mode: "bridge"
-        ports:
-            - '${IP_ADDRESS}:9009:9000'
-        environment:
-            - MINIO_ACCESS_KEY=minio
-            - MINIO_SECRET_KEY=minio123
-        volumes:
-            - './minio:/root/.minio'
-            - '${PWD}:/export'
-        command: server /export
+    # # ----------------------------------------
+    # # MINIO
+    # # ----------------------------------------
+    # minio:
+        # image: minio/minio
+        # container_name: minio
+        # restart: unless-stopped
+        # network_mode: "bridge"
+        # ports:
+            # - '${IP_ADDRESS}:9009:9000'
+        # environment:
+            # - MINIO_ACCESS_KEY=minio
+            # - MINIO_SECRET_KEY=minio123
+        # volumes:
+            # - './minio:/root/.minio'
+            # - '${PWD}:/export'
+        # command: server /export
 
     # ----------------------------------------
     # MUXIMUX
@@ -164,23 +164,23 @@ services:
             - '/sys:/host/sys:ro'
             - '/var/run/docker.sock:/var/run/docker.sock'
 
-    # ----------------------------------------
-    # NZBGet
-    # ----------------------------------------
-    nzbget:
-        image: linuxserver/nzbget
-        container_name: nzbget
-        restart: unless-stopped
-        environment:
-          - PUID=${PUID}
-          - PGID=${PGID}
-          - TZ=${TZ}
-        network_mode: 'bridge'
-        ports:
-          - '${IP_ADDRESS}:6789:6789'
-        volumes:
-          - './nzbget:/config'
-          - './content/completed:/downloads'
+    # # ----------------------------------------
+    # # NZBGet
+    # # ----------------------------------------
+    # nzbget:
+        # image: linuxserver/nzbget
+        # container_name: nzbget
+        # restart: unless-stopped
+        # environment:
+          # - PUID=${PUID}
+          # - PGID=${PGID}
+          # - TZ=${TZ}
+        # network_mode: 'bridge'
+        # ports:
+          # - '${IP_ADDRESS}:6789:6789'
+        # volumes:
+          # - './nzbget:/config'
+          # - './content/completed:/downloads'
 
     # ----------------------------------------
     # OMBI
@@ -269,24 +269,24 @@ services:
             - '${MOVIEDIR}:/movies'
             - '/etc/localtime:/etc/localtime:ro'
 
-    # ----------------------------------------
-    # SICKRAGE
-    # ----------------------------------------
-    sickrage:
-        image: linuxserver/sickrage
-        container_name: sickrage
-        restart: unless-stopped
-        network_mode: "bridge"
-        ports:
-            - '${IP_ADDRESS}:8081:8081'
-        environment:
-            - PUID=${PUID}
-            - PGID=${PGID}
-        volumes:
-            - './sickrage:/config'
-            - './content/completed:/downloads'
-            - '${TVDIR}:/tv'
-            - '/etc/localtime:/etc/localtime:ro'
+    # # ----------------------------------------
+    # # SICKRAGE
+    # # ----------------------------------------
+    # sickrage:
+        # image: linuxserver/sickrage
+        # container_name: sickrage
+        # restart: unless-stopped
+        # network_mode: "bridge"
+        # ports:
+            # - '${IP_ADDRESS}:8081:8081'
+        # environment:
+            # - PUID=${PUID}
+            # - PGID=${PGID}
+        # volumes:
+            # - './sickrage:/config'
+            # - './content/completed:/downloads'
+            # - '${TVDIR}:/tv'
+            # - '/etc/localtime:/etc/localtime:ro'
 
     # ----------------------------------------
     # SONARR
