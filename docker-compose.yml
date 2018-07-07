@@ -54,14 +54,14 @@ services:
         cap_add:
             - NET_ADMIN
         environment:
-            - VPN_ENABLED=yes
-            - VPN_USER=${PIAUNAME}
-            - VPN_PASS=${PIAPASS}
-            - VPN_REMOTE=${VPN_REMOTE}
-            - VPN_PORT=1198
-            - VPN_PROTOCOL=udp
-            - VPN_DEVICE_TYPE=tun
-            - VPN_PROV=pia
+            - VPN_ENABLED=no
+            # - VPN_USER=${PIAUNAME}
+            # - VPN_PASS=${PIAPASS}
+            # - VPN_REMOTE=${VPN_REMOTE}
+            # - VPN_PORT=1198
+            # - VPN_PROTOCOL=udp
+            # - VPN_DEVICE_TYPE=tun
+            # - VPN_PROV=pia
             - STRONG_CERTS=no
             - ENABLE_PRIVOXY=yes
             - STRICT_PORT_FORWARD=yes
