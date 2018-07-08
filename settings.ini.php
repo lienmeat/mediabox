@@ -35,13 +35,13 @@ icon = "muximux-bullhorn"
 color = "#93c47d"
 enabled = "true"
 
-// [Couchpotato]
-// name = "CouchPotato"
-// url = "http://locip:5050"
-// scale = 1
-// icon = "muximux-couchpotato"
-// color = "#f85c22"
-// enabled = "true"
+[Couchpotato]
+name = "CouchPotato"
+url = "http://locip:5050"
+scale = 1
+icon = "muximux-couchpotato"
+color = "#f85c22"
+enabled = "true"
 
 [Deluge]
 name = "Deluge"
@@ -51,13 +51,13 @@ icon = "muximux-deluge"
 color = "#385171"
 enabled = "true"
 
-// [Duplicati]
-// name = "Duplicati"
-// url = "http://locip:8200"
-// scale = 1
-// icon = "muximux-copy2"
-// color = "#6fa8dc"
-// enabled = "true"
+[Duplicati]
+name = "Duplicati"
+url = "http://locip:8200"
+scale = 1
+icon = "muximux-copy2"
+color = "#6fa8dc"
+enabled = "true"
 
 [Jackett]
 name = "Jackett"
@@ -67,13 +67,13 @@ icon = "muximux-jackett"
 color = ""
 enabled = "true"
 
-// [Minio]
-// name = "Minio"
-// url = "http://locip:9009"
-// scale = 1
-// icon = "muximux-stack"
-// color = "#999999"
-// enabled = "true"
+[Minio]
+name = "Minio"
+url = "http://locip:9009"
+scale = 1
+icon = "muximux-stack"
+color = "#999999"
+enabled = "true"
 
 [NetData]
 name = "NetData"
@@ -83,13 +83,13 @@ icon = "muximux-meter"
 color = "#cc0000"
 enabled = "true"
 
-// [NZBGet]
-// name = "NZBGet"
-// url = "http://locip:6789"
-// scale = 1
-// icon = "muximux-download"
-// color = "#3f8927"
-// enabled = "true"
+[NZBGet]
+name = "NZBGet"
+url = "http://locip:6789"
+scale = 1
+icon = "muximux-download"
+color = "#3f8927"
+enabled = "true"
 
 [Ombi]
 name = "Ombi"
@@ -123,13 +123,13 @@ icon = "muximux-sonarr"
 color = "#ffe599"
 enabled = "true"
 
-// [SickRage]
-// name = "SickRage"
-// url = "http://locip:8081"
-// scale = 1
-// icon = "muximux-tv"
-// color = "#6fa8dc"
-// enabled = "true"
+[SickRage]
+name = "SickRage"
+url = "http://locip:8081"
+scale = 1
+icon = "muximux-tv"
+color = "#6fa8dc"
+enabled = "true"
 
 [Sonarr]
 name = "Sonarr"
