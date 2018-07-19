@@ -68,7 +68,7 @@ services:
             - './content:/data'
             - './delugevpn/config:/config'
             - './conf/delugevpn/scripts:/config/scripts'
-            - './conf/delugevpn/execute.conf:/config/execute.conf'
+            - './conf/delugevpn/extract.conf:/config/execute.conf'
             - '/etc/localtime:/etc/localtime:ro'
 
     # ----------------------------------------
