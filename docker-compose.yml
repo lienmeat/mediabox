@@ -67,8 +67,8 @@ services:
         volumes:
             - './content:/data'
             - './delugevpn/config:/config'
-            - './conf/delugevpn/scripts:/config/x_scripts'
-            - './conf/delugevpn/extract.conf:/config/extract.conf'
+            - './conf/delugevpn:/config'
+            - './conf/delugevpn:/config'
             - '/etc/localtime:/etc/localtime:ro'
 
     # ----------------------------------------
